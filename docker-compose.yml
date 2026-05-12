@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  # Flask Web App
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./uploads:/app/uploads
+      - ./AICrawler2/AICrawler2/emailcrawler/emailcrawler:/app/crawler
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+    command: python app.py
+    networks:
+      - email-crawler-net
+
+  # Jenkins (Optional - for local testing)
+  jenkins:
+    image: jenkins/jenkins:latest
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
+    networks:
+      - email-crawler-net
+
+volumes:
+  jenkins_data:
+
+networks:
+  email-crawler-net:
+    driver: bridge

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Automation Login</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: #0f0f0f;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 0, 64, 0.15);
+            filter: blur(120px);
+            border-radius: 50%;
+            top: -150px;
+            right: -150px;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 0, 64, 0.12);
+            filter: blur(100px);
+            border-radius: 50%;
+            bottom: -120px;
+            left: -120px;
+        }
+
+        .login-card {
+            width: 420px;
+            background: rgba(22, 22, 22, 0.92);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 42px;
+            position: relative;
+            z-index: 10;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+        }
+
+        .brand {
+            color: white;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .brand span {
+            color: #ff2d55;
+        }
+
+        .subtitle {
+            color: #8d8d8d;
+            font-size: 15px;
+            margin-bottom: 35px;
+        }
+
+        .input-group {
+            margin-bottom: 22px;
+        }
+
+        .input-group label {
+            color: #c9c9c9;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            background: #1a1a1a;
+            border: 1px solid #2d2d2d;
+            border-radius: 14px;
+            padding: 16px;
+            color: white;
+            font-size: 15px;
+            transition: 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #ff2d55;
+            box-shadow: 0 0 20px rgba(255,45,85,0.25);
+        }
+
+        .login-btn {
+            width: 100%;
+            border: none;
+            padding: 16px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #ff2d55, #ff0040);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(255,45,85,0.35);
+        }
+
+        .error {
+            color: #ff5c77;
+            margin-bottom: 18px;
+            font-size: 14px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+
+    <div class="brand">One<span>Grasp</span></div>
+
+    <div class="subtitle">
+        Automation Dashboard for Email Extraction Pipeline
+    </div>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form action="/login" method="POST">
+
+        <div class="input-group">
+            <label>Username</label>
+            <input type="text" name="username" placeholder="Enter username" required>
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter password" required>
+        </div>
+
+        <button class="login-btn" type="submit">
+            Access Dashboard
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
